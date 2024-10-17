@@ -49,3 +49,35 @@ $('.remove-cart').click(function(){
         }
     })
 })
+
+$('.plus-wishlist').click(function(){
+    var id=$(this).attr("pid").toString();
+    $.ajax({
+        type:"GET",
+        url:"/pluswishlist",
+        data:{
+            prod_id:id
+        },
+        success: function(data){
+            button.removeClass('btn-success plus-wishlist').addClass('btn-danger minus-wishlist');
+            // Update the button icon
+            button.html('<i class="fas fa-heart fa-lg"></i>');
+        }
+    })
+})
+
+$('.minus-wishlist').click(function(){
+    var id=$(this).attr("pid").toString();
+    $.ajax({
+        type:"GET",
+        url:"/minuswishlist",
+        data:{
+            prod_id:id
+        },
+        success: function(data){
+            button.removeClass('btn-danger minus-wishlist').addClass('btn-success plus-wishlist');
+            // Update the button icon
+            button.html('<i class="fas fa-heart fa-lg"></i>');
+        }
+    })
+})

@@ -1,6 +1,6 @@
 from django.shortcuts import render,redirect
 from django.views import View
-from . models import Customer, Product, Cart, Payment, OrderPlaced
+from . models import Customer, Product, Cart, Payment, OrderPlaced, Wishlist
 from django.db.models import Count
 from django.http import JsonResponse
 from . forms import CustomerRegistrationForm, CustomerProfileForm
@@ -50,6 +50,7 @@ class CategoryTitle(View):
 class ProductDetail(View):
     def get(self,request,pk):
         product = Product.objects.get(pk=pk)
+        wishlist = Wishlist.objects.filter(Q(product=product) & Q(user=request.user))
         totalitem = 0
         if request.user.is_authenticated:
             totalitem = len(Cart.objects.filter(user=request.user))
@@ -262,5 +263,27 @@ def remove_cart(request):
         data={
             'amount':amount,
             'totalamount':totalamount
+        }
+        return JsonResponse(data)
+
+def plus_wishlist(request):
+    if request.method == 'GET':
+        prod_id = request.GET['prod_id']
+        product = Product.objects.get(id=prod_id)
+        user = request.user
+        Wishlist(user=user, product=product).save()
+        data={
+            'message':'Wishlist added Successfully',
+        }
+        return JsonResponse(data)
+    
+def minus_wishlist(request):
+    if request.method == 'GET':
+        prod_id = request.GET['prod_id']
+        product = Product.objects.get(id=prod_id)
+        user = request.user
+        Wishlist.objects.filter(user=user, product=product).delete()
+        data={
+            'message':'Wishlist remove Successfully',
         }
         return JsonResponse(data)

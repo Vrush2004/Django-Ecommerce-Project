@@ -25,6 +25,8 @@ urlpatterns = [
     path("pluscart/", views.plus_cart, name='pluscart'),
     path("minuscart/", views.minus_cart, name='minuscart'),
     path("removecart/", views.remove_cart, name='removecart'),
+    path("pluswishlist/", views.plus_wishlist),
+    path("minuswishlist/", views.minus_wishlist),
 
     #login authentication
     path("registration/", views.CutomerRegistrationView.as_view(),name="customerregistration"),
