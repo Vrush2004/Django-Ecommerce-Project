@@ -59,9 +59,7 @@ $('.plus-wishlist').click(function(){
             prod_id:id
         },
         success: function(data){
-            button.removeClass('btn-success plus-wishlist').addClass('btn-danger minus-wishlist');
-            // Update the button icon
-            button.html('<i class="fas fa-heart fa-lg"></i>');
+            window.location.href = `http://localhost:8000/productdetail/${id}`
         }
     })
 })
@@ -75,9 +73,7 @@ $('.minus-wishlist').click(function(){
             prod_id:id
         },
         success: function(data){
-            button.removeClass('btn-danger minus-wishlist').addClass('btn-success plus-wishlist');
-            // Update the button icon
-            button.html('<i class="fas fa-heart fa-lg"></i>');
+            window.location.href = `http://localhost:8000/productdetail/${id}`
         }
     })
 })
