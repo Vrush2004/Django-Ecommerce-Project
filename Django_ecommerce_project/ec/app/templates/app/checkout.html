@@ -62,13 +62,13 @@
     </div>
 {% endblock main-content %}
 
-{% block payment-gateway %} 
+<!-- {% block payment-gateway %} 
 <script>
     var options = {
         "key": "rzp_test_2TUHCJnGDCobwu",
         "amount": "{{razoramount}}",
         "currency":"INR",
-        "name":"Mavericks",
+        "name":"Neel Products",
         "description":"Purchase Product",
         "order_id": "{{order_id}}",
         "handler": function(response){
@@ -80,5 +80,14 @@
             "color":"#3399cc"
         }
     };
+    var rzp1 = new Razorpay(options);
+    rzp1.on('Payment failed', function (response){
+        alert(response.error.description);
+    });
+    document.getElementById('rzp-button1').onclick = function(e){
+        console.log("button click");
+        rzp1.open();
+        e.preventDefault();
+    }
 </script>
-{% endblock payment-gateway%}
+{% endblock payment-gateway%} -->
