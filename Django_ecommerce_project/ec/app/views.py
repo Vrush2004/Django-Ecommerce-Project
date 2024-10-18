@@ -313,3 +313,14 @@ def minus_wishlist(request):
             'message':'Wishlist remove Successfully',
         }
         return JsonResponse(data)
+    
+def search(request):
+    query = request.GET['search']
+    totalitem = 0
+    wishitem = 0
+    if request.user.is_authenticated:
+        totalitem = len(Cart.objects.filter(user=request.user))
+        wishitem = len(Wishlist.objects.filter(user=request.user))
+    order_placed = OrderPlaced.objects.filter(user=request.user)
+    product = Product.objects.filter(Q(title__icontains=query))
+    return render(request, "app/search.html", locals())
