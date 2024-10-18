@@ -22,6 +22,7 @@ urlpatterns = [
     # path("paymentdone/", views.payment_done, name="paymentdone"),
     path("orders/", views.orders, name='orders'),
     path("search/", views.search, name='search'),
+    path("wishlist", views.show_wishlist, name='showwishlist'),
 
     path("pluscart/", views.plus_cart, name='pluscart'),
     path("minuscart/", views.minus_cart, name='minuscart'),
@@ -31,7 +32,7 @@ urlpatterns = [
 
     #login authentication
     path("registration/", views.CutomerRegistrationView.as_view(),name="customerregistration"),
-    path("accounts/login", auth_view.LoginView.as_view(template_name="app/login.html", authentication_form = LoginForm), name='login'),
+    path("accounts/login/", auth_view.LoginView.as_view(template_name="app/login.html", authentication_form = LoginForm), name='login'),
     path("passwordchange/", auth_view.PasswordChangeView.as_view(template_name='app/changepassword.html',form_class=MyPasswordChangeForm,success_url='/passwordchangedone'), name='passwordchange'),
     path('passwordchangedone/', auth_view.PasswordChangeDoneView.as_view(template_name='app/passwordchangedone.html'), name='passwordchangedone'),
     path("logout/", auth_view.LogoutView.as_view(next_page='login'),name='logout'),
